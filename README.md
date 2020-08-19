@@ -1,6 +1,12 @@
 # local_notification
 
-A new Flutter project.
+## Primeira Notificação Local
+
+![1-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/1-notification.png)
+
+## Segunda Notificação Local 
+
+![2-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/2-notification.png)
 
 ## Getting Started
 
