@@ -1,23 +1,27 @@
 # local_notification
 
-## Primeira Notificação Local
-
+## Primeira Notificação Local  
+   
+Notificação após clicar no botão  
 ![1-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/1-notification.png)
 
-## Segunda Notificação Local 
+## Segunda Notificação Local   
 
+Notificação 5 sec após clicar no botão  
 ![2-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/2-notification.png)
 
-## Terceira Notificação Local
+## Terceira Notificação Local   
 
+Notificações diárias às 10hrs e semanalmnete às segundas às 8hrs  
 ![3-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/3-notification.png)
 
-## Quarta Notificação Local
+## Quarta Notificação Local  
 
+Notificação usando o firebase  
 ![firebase](https://github.com/marcos-bah/local-notifications/blob/master/docs/firebase.png)
 ![4-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/4-notification.png)
 
-## Getting Started
+## Getting Started  
 
 This project is a starting point for a Flutter application.
 
