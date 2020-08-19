@@ -33,8 +33,7 @@ class _LocalNotificationsState extends State<LocalNotifications> {
   }
 
   void initializing() async {
-    // app_icon > android/app/src/main/res/drawable/app_icon.png
-    androidInitializationSettings = AndroidInitializationSettings("app_icon");
+    androidInitializationSettings = AndroidInitializationSettings('app_icon');
     iosInitializationSettings = IOSInitializationSettings(
         onDidReceiveLocalNotification: onDidReceiveLocalNotification);
     initializationSettings = InitializationSettings(
@@ -47,23 +46,42 @@ class _LocalNotificationsState extends State<LocalNotifications> {
     await notification();
   }
 
+  void _showNotificationsAfterSecond() async {
+    print(">>");
+    await notificationAfterSec();
+  }
+
   Future<void> notification() async {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
-      "Channel _ID",
-      "Channel title",
-      "Channel description",
-      priority: Priority.High,
-      importance: Importance.High,
-      ticker: "Test",
-    );
+            'Channel ID', 'Channel title', 'channel body',
+            priority: Priority.High,
+            importance: Importance.Max,
+            ticker: 'test');
 
     IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
 
     NotificationDetails notificationDetails =
         NotificationDetails(androidNotificationDetails, iosNotificationDetails);
     await flutterLocalNotificationsPlugin.show(
-        0, "Hello There", "Please, Visit us", notificationDetails);
+        0, 'Hello there', 'please subscribe my channel', notificationDetails);
+  }
+
+  Future<void> notificationAfterSec() async {
+    var timeDelayed = DateTime.now().add(Duration(seconds: 5));
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+            'second channel ID', 'second Channel title', 'second channel body',
+            priority: Priority.High,
+            importance: Importance.Max,
+            ticker: 'test');
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+
+    NotificationDetails notificationDetails =
+        NotificationDetails(androidNotificationDetails, iosNotificationDetails);
+    await flutterLocalNotificationsPlugin.schedule(1, 'Hello there',
+        'please subscribe my channel', timeDelayed, notificationDetails);
   }
 
   Future onSelectNotification(String payLoad) {
@@ -72,22 +90,20 @@ class _LocalNotificationsState extends State<LocalNotifications> {
     }
 
     // we can set navigator to navigate another screen
-    // podemos direcionar uma outra screen
   }
 
   Future onDidReceiveLocalNotification(
-      int id, String title, String body, String payLoad) async {
+      int id, String title, String body, String payload) async {
     return CupertinoAlertDialog(
       title: Text(title),
       content: Text(body),
       actions: <Widget>[
         CupertinoDialogAction(
-          isDefaultAction: true,
-          onPressed: () {
-            print("");
-          },
-          child: Text("Okay"),
-        ),
+            isDefaultAction: true,
+            onPressed: () {
+              print("");
+            },
+            child: Text("Okay")),
       ],
     );
   }
@@ -107,6 +123,20 @@ class _LocalNotificationsState extends State<LocalNotifications> {
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
                   "Show Notification",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            FlatButton(
+              color: Colors.blue,
+              onPressed: _showNotificationsAfterSecond,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Show Notification after few seconds",
                   style: TextStyle(
                     fontSize: 20.0,
                     color: Colors.white,
