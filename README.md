@@ -8,6 +8,15 @@
 
 ![2-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/2-notification.png)
 
+## Terceira Notificação Local
+
+![3-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/3-notification.png)
+
+## Quarta Notificação Local
+
+![firebase](https://github.com/marcos-bah/local-notifications/blob/master/docs/firebase.png)
+![4-not](https://github.com/marcos-bah/local-notifications/blob/master/docs/4-notification.png)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
