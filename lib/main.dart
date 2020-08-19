@@ -64,7 +64,7 @@ class _LocalNotificationsState extends State<LocalNotifications> {
     NotificationDetails notificationDetails =
         NotificationDetails(androidNotificationDetails, iosNotificationDetails);
     await flutterLocalNotificationsPlugin.show(
-        0, 'Hello there', 'please subscribe my channel', notificationDetails);
+        0, 'ASIMOV JR', 'Batemos METAAAA!!!', notificationDetails);
   }
 
   Future<void> notificationAfterSec() async {
