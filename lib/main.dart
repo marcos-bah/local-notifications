@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,6 +21,16 @@ class LocalNotifications extends StatefulWidget {
 }
 
 class _LocalNotificationsState extends State<LocalNotifications> {
+  //firebase
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+  String _message = '';
+
+  _registerOnFirebase() {
+    _firebaseMessaging.subscribeToTopic('all');
+    _firebaseMessaging.getToken().then((token) => print(token));
+  }
+
+  //local notification
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   AndroidInitializationSettings androidInitializationSettings;
@@ -28,10 +39,30 @@ class _LocalNotificationsState extends State<LocalNotifications> {
 
   @override
   void initState() {
+    //firebase
+    _registerOnFirebase();
+    getMessage();
+    //local
     super.initState();
     initializing();
   }
 
+  //firebase
+  void getMessage() {
+    _firebaseMessaging.configure(
+        onMessage: (Map<String, dynamic> message) async {
+      print('received message');
+      setState(() => _message = message["notification"]["body"]);
+    }, onResume: (Map<String, dynamic> message) async {
+      print('on resume $message');
+      setState(() => _message = message["notification"]["body"]);
+    }, onLaunch: (Map<String, dynamic> message) async {
+      print('on launch $message');
+      setState(() => _message = message["notification"]["body"]);
+    });
+  }
+
+  //local
   void initializing() async {
     androidInitializationSettings = AndroidInitializationSettings('app_icon');
     iosInitializationSettings = IOSInitializationSettings(
