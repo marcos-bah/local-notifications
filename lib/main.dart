@@ -51,6 +51,14 @@ class _LocalNotificationsState extends State<LocalNotifications> {
     await notificationAfterSec();
   }
 
+  void _showNotificationsDaily() async {
+    await notificationDaily();
+  }
+
+  void _showNotificationsWeekly() async {
+    await notificationWeekly();
+  }
+
   Future<void> notification() async {
     AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -84,6 +92,41 @@ class _LocalNotificationsState extends State<LocalNotifications> {
         'please subscribe my channel', timeDelayed, notificationDetails);
   }
 
+  Future<void> notificationDaily() async {
+    var time = Time(10, 0, 0); // 10hrs
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+            '3 channel ID', '3 Channel title', '3 channel body',
+            priority: Priority.High,
+            importance: Importance.Max,
+            ticker: 'test');
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+
+    NotificationDetails notificationDetails =
+        NotificationDetails(androidNotificationDetails, iosNotificationDetails);
+    await flutterLocalNotificationsPlugin.showDailyAtTime(
+        1, 'Bom dia', 'Notification Daily', time, notificationDetails);
+  }
+
+  Future<void> notificationWeekly() async {
+    var time = Time(8, 0, 0); // 8hrs
+    var day = Day.Monday;
+    AndroidNotificationDetails androidNotificationDetails =
+        AndroidNotificationDetails(
+            '4 channel ID', '4 Channel title', '4 channel body',
+            priority: Priority.High,
+            importance: Importance.Max,
+            ticker: 'test');
+
+    IOSNotificationDetails iosNotificationDetails = IOSNotificationDetails();
+
+    NotificationDetails notificationDetails =
+        NotificationDetails(androidNotificationDetails, iosNotificationDetails);
+    await flutterLocalNotificationsPlugin.showWeeklyAtDayAndTime(
+        1, 'Boa Semana', 'Notification Weekly', day, time, notificationDetails);
+  }
+
   Future onSelectNotification(String payLoad) {
     if (payLoad != null) {
       print(payLoad);
@@ -110,6 +153,8 @@ class _LocalNotificationsState extends State<LocalNotifications> {
 
   @override
   Widget build(BuildContext context) {
+    _showNotificationsDaily();
+    _showNotificationsWeekly();
     return Scaffold(
       body: Container(
         width: double.infinity,
